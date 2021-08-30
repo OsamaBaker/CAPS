@@ -6,7 +6,7 @@ require('./delivery/driver/driver'),
 require('./delivery/vendor/vendor');
 
 const port = 3000;
-const io = require('socket.io');
+const io = require('socket.io')(port);
 
 const caps = io.of('/caps');
 

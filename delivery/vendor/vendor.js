@@ -5,7 +5,7 @@ const io = require('socket.io-client');
 const host = 'http://localhost:3000';
 const connectionToCaps=io.connect('http://localhost:3000');
 const connectionToCapsNameSpace=io.connect(`${host}/caps`);
-const STORE_NAME=process.env.STORE_NAME || 'Mariam-Grill-Resturant';
+const STORE_NAME=process.env.STORE_NAME || 'Seattle Breakfast';
 
 
 setInterval(() => {
