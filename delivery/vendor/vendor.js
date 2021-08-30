@@ -8,38 +8,33 @@ const connectionToCapsNameSpace=io.connect(`${host}/caps`);
 const STORE_NAME=process.env.STORE_NAME || 'Seattle Breakfast';
 
 
-setInterval(() => {
-    // console.log('orderrr');
+
+function pickup(payload){
     let order={
         store:STORE_NAME,
         orderID:faker.datatype.uuid(),
         customer:faker.name.findName(),
         address:faker.address.city()
     }
-    // let order={
-        //     store:STORE_NAME,
-        //     orderID:1,
-        //     customer:'Sara',
-        //     address:'Irbid'
-        // }
-        
+
         connectionToCapsNameSpace.emit('pickup',order);
-        // console.log(order);
-        
-        
-        
-        
-    }, 5000);
+}
+
+setInterval(function() {
+    pickup()
+}, 5000)
+
+
+
+
+
+
+        connectionToCapsNameSpace.on('ThankYou', ThankYouFunc)
+
+        function ThankYouFunc (payload){
+            console.log(`Thank you for delivering ${payload.orderID}`)
+        }
+
     
     
     
-    connectionToCapsNameSpace.on('delivered',(payload)=>{
-        // console.log(`DRIVER: delivered up ${payload.orderID}`);
-        console.log(`VENDOR: Thank you for delivering  ${payload.orderID} 🥰 `);
-        // let Event={
-        //     event:'delivered',
-        //     time:new Date(),
-        //     payload:payload,
-        // };
-        // console.log('Event', Event);
-    })
